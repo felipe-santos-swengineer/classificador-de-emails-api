@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI, Form, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from huggingface_hub import InferenceClient
@@ -5,7 +6,12 @@ from dotenv import load_dotenv
 import pdfplumber
 import nltk
 import io
-import os
+
+
+# pré processamento NLP  #
+nltk.download("punkt", quiet=True)
+nltk.download("stopwords", quiet=True)
+nltk.download("wordnet", quiet=True)
 
 # Config da API e do HF #
 load_dotenv()
@@ -31,10 +37,6 @@ app.add_middleware(
 client = InferenceClient(token=HF_TOKEN)
 MODEL = "meta-llama/Llama-3.1-8B-Instruct"
 
-# pré processamento NLP  #
-nltk.download("punkt", quiet=True)
-nltk.download("stopwords", quiet=True)
-nltk.download("wordnet", quiet=True)
 
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
