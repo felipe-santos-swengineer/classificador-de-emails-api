@@ -5,3 +5,4 @@ pdfplumber
 nltk 
 python-multipart
 python-dotenv
+huggingface-hub
