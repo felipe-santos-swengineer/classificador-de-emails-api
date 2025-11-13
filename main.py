@@ -8,10 +8,14 @@ import nltk
 import io
 
 
-# pré processamento NLP  #
-nltk.download("punkt", quiet=True)
-nltk.download("stopwords", quiet=True)
-nltk.download("wordnet", quiet=True)
+NLTK_DATA_DIR = os.path.join(os.path.dirname(__file__), "nltk_data")
+os.makedirs(NLTK_DATA_DIR, exist_ok=True)
+
+nltk.data.path.append(NLTK_DATA_DIR)
+
+nltk.download("punkt", download_dir=NLTK_DATA_DIR)
+nltk.download("stopwords", download_dir=NLTK_DATA_DIR)
+nltk.download("wordnet", download_dir=NLTK_DATA_DIR)
 
 # Config da API e do HF #
 load_dotenv()
