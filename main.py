@@ -35,6 +35,7 @@ MODEL = "meta-llama/Llama-3.1-8B-Instruct"
 nltk.download("punkt", download_dir="./nltk_data")
 nltk.download("stopwords", download_dir="./nltk_data")
 nltk.download("wordnet", download_dir="./nltk_data")
+nltk.data.path.append("./nltk_data")
 
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
