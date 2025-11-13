@@ -32,9 +32,9 @@ client = InferenceClient(token=HF_TOKEN)
 MODEL = "meta-llama/Llama-3.1-8B-Instruct"
 
 # pré processamento NLP  #
-nltk.download("punkt", quiet=True)
-nltk.download("stopwords", quiet=True)
-nltk.download("wordnet", quiet=True)
+nltk.download("punkt", download_dir="./nltk_data")
+nltk.download("stopwords", download_dir="./nltk_data")
+nltk.download("wordnet", download_dir="./nltk_data")
 
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
