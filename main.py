@@ -3,17 +3,15 @@ from fastapi import FastAPI, Form, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from huggingface_hub import InferenceClient
 from dotenv import load_dotenv
+import re
 import pdfplumber
 import nltk
 import io
 
-NLTK_DATA_DIR = os.path.join(os.path.dirname(__file__), "nltk_data")
-os.makedirs(NLTK_DATA_DIR, exist_ok=True)
-nltk.download("punkt", download_dir=NLTK_DATA_DIR)
-nltk.download("stopwords", download_dir=NLTK_DATA_DIR)
-nltk.download("wordnet", download_dir=NLTK_DATA_DIR)
-nltk.data.path.insert(0, NLTK_DATA_DIR)
-
+# pré processamento NLP  #
+nltk.download("punkt", quiet=True)
+nltk.download("stopwords", quiet=True)
+nltk.download("wordnet", quiet=True)
 
 # Config da API e do HF #
 load_dotenv()
@@ -43,6 +41,9 @@ MODEL = "meta-llama/Llama-3.1-8B-Instruct"
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
+def tokenize_text(text: str):
+    return re.findall(r'\b\w+\b', text.lower())
+
 def extract_text_from_pdf(file: bytes) -> str:
     with pdfplumber.open(io.BytesIO(file)) as pdf:
         return " ".join(page.extract_text() or "" for page in pdf.pages)
@@ -51,7 +52,7 @@ def extract_text_from_txt(file: bytes) -> str:
     return file.decode("utf-8")
 
 def preprocess_text(text: str) -> str:
-    tokens = nltk.word_tokenize(text.lower())
+    tokens = tokenize_text(text) #nltk.word_tokenize(text.lower())
     stop_words = set(stopwords.words("portuguese"))
     lemmatizer = WordNetLemmatizer()
     filtered = [lemmatizer.lemmatize(t) for t in tokens if t.isalpha() and t not in stop_words]
