@@ -33,10 +33,10 @@ MODEL = "meta-llama/Llama-3.1-8B-Instruct"
 
 # pré processamento NLP  #
 NLTK_DATA_DIR = os.path.join(os.path.dirname(__file__), "nltk_data")
-os.makedirs(NLTK_DATA_DIR, exist_ok=True)
-nltk.download("punkt", download_dir=NLTK_DATA_DIR)
-nltk.download("stopwords", download_dir=NLTK_DATA_DIR)
-nltk.download("wordnet", download_dir=NLTK_DATA_DIR)
+#os.makedirs(NLTK_DATA_DIR, exist_ok=True)
+#nltk.download("punkt", download_dir=NLTK_DATA_DIR)
+#nltk.download("stopwords", download_dir=NLTK_DATA_DIR)
+#nltk.download("wordnet", download_dir=NLTK_DATA_DIR)
 nltk.data.path.append(NLTK_DATA_DIR)
 
 from nltk.corpus import stopwords
