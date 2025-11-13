@@ -1,11 +1,7 @@
 fastapi
 uvicorn
-transformers
-torch
 pydantic
-PyPDF2
 pdfplumber 
 nltk 
 python-multipart
 python-dotenv
-openai
